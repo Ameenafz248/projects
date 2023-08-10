@@ -1,11 +1,15 @@
 from django.db import models
 import datetime
 from datetime import date
+from django import utils
+import uuid
 
 # Create your models here.
 class Project(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=20)
-    date_added = models.DateField(default=date.today())
+    link = models.URLField(null=False)
+    date_added = models.DateField(auto_now_add=True)
     hits = models.IntegerField(default=0)
     description = models.TextField(blank=True)
 
